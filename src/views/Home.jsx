@@ -14,16 +14,33 @@ class Home extends Component {
       movies: [],
       popularMv: [],
       page: 1,
-      loading: false
+      loading: false,
+      searchText: "",
     };
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
-  componentDidMount() {
 
+  handleSearch() {
+    let searchText = this.props.location.state.searchText;
+
+    const rs = this.filterMovie(searchText);
+    this.setState({
+      movies: rs
+    })
+  };
+  filterMovie(searchText) {
+    let movies = this.state.movies;
+    const searchRs = movies.filter(mv => mv.title.includes(searchText));
+    return searchRs;
+  }
+
+  componentDidMount() {
+    this.handleSearch();
     GET_MOVIES.query({
       query: gql`
-        query GetRates {
+        query GetMovies {
           nowPlaying {
             count
             total
@@ -58,8 +75,13 @@ class Home extends Component {
 
     });
   }
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     window.addEventListener('scroll', this.handleScroll, false);
+    let prevSearch = prevProps.location.state.searchText;
+    let newSearch = this.props.location.state.searchText;
+    if (prevSearch !== newSearch) {
+      this.handleSearch();
+    }
   }
   handleScroll() {
     const check = parseInt(document.body.offsetHeight + window.pageYOffset) ===
@@ -136,13 +158,12 @@ class Home extends Component {
     return (
       <div className="listing">
         {/* <h2 className="title visible-hidden">List movies</h2> */}
-
         <MovieCarousel popularMv={this.state.popularMv}></MovieCarousel>
         <div className="container">
           <FilmListing movies={this.state.movies}></FilmListing>
           {this.state.loading == false && <div className="loading-bottom">
             <div></div><div></div><div></div></div>}
-          {this.state.nowPlaying.page && (
+          {this.state.movies.length > 20 && (
             <Pagination
               activePage={this.state.nowPlaying.page}
               itemsCountPerPage={this.state.nowPlaying.count}

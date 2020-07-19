@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import routes from '../routes';
 import { Route, Switch } from "react-router-dom";
 import '../assets/styles/main.scss'
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Home from '../views/Home.jsx';
 class Admin extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,11 @@ class Admin extends Component {
       filter: e.target.value,
     });
   }
+  componentDidUpdate(prevState) {
+    console.log(this.state.filter)
+    const value = this.state.filter;
 
+  }
   handleSubmit() {
 
   }
@@ -30,7 +34,7 @@ class Admin extends Component {
           <Nav className="mr-auto">
             <Nav.Link href="/">Home</Nav.Link>
           </Nav>
-          <Form className="form-search" action="/" onSubmit={this.handleSubmit}>
+          <Form className="form-search" onSubmit={this.handleSubmit}>
             <input className="form-control form-control-sm " type="text" placeholder="Search"
               aria-label="Search"
               placeholder="Search"
