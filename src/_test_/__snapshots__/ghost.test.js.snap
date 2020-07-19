@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it shows the expected text when clicked 1`] = `
+<button>
+  Nothing to do for now
+</button>
+`;

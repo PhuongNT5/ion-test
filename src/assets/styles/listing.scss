@@ -1,0 +1,223 @@
+.listing {
+  padding-bottom: 80px;
+  padding-top: 82px;
+  
+  .title {
+  }
+  &-wrapper {
+    padding: 60px 0 40px;
+    .movie-item {
+      background-color: #fff;
+      border-radius: 5px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      &__thumb {
+        position: relative;
+        img {
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+          width: 100%;
+        }
+      }
+      &__rate {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 5px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 85px;
+        span {
+          flex: 100 0 50%;
+        }
+        .rate {
+          font-size: 20px;
+        }
+        .count {
+          font-size: 16px;
+        }
+        .svg-inline--fa {
+          flex: 0 0 40%;
+          color: #e74a3b;
+          font-size: 20px;
+        }
+      }
+      &__info {
+        text-align: left;
+        padding: 20px;
+        font-size: 14px;
+        display: flex;
+        flex-direction: column;
+        flex: auto;
+        position: relative;
+        &--title {
+          font-size: 20px;
+          font-weight: bold;
+          color: #333333;
+          text-decoration: none;
+          flex: auto;
+          width: 100%;
+          &:hover {
+            color: #333333;
+            text-decoration: none;
+          }
+        }
+        &--date {
+          .fa-calendar {
+            color: #d1d3e2;
+            margin: 0 5px;
+          }
+          span {
+            color: #e74a3b;
+          }
+        }
+      }
+    }
+  }
+  .popular-carousel {
+    background-image: url('../images/main_slider_bg.jpg');
+    height: 320px;
+    background-position: center 0;
+    background-size: cover;
+    position: relative;
+    z-index: 9;
+    &::after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 0;
+      background-color: black;
+      bottom: 0;
+      right: 0;
+      opacity: 0.8;
+      z-index: -1;
+    }
+    .coverflow {
+      z-index: 9;
+
+      &__container__1P-xE {
+        background: none;
+      }
+      &__figure__3bk_C {
+        -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0))
+      }
+
+    }
+    #coverflow__arrow1__2X2XF {
+      .coverflow__arrow__IDi7v {
+        position: fixed;
+      }
+      @media only screen and (max-width: 767px) {
+        .coverflow__arrow__IDi7v.coverflow__right__1tzAF {
+          right: 20px;
+          &:before, &:after  {
+            width: 20px;
+          }
+        }
+        .coverflow__arrow__IDi7v.coverflow__left__PhMc6 {
+          left: 20px;
+          &:before, &:after  {
+            width: 20px;
+          }
+        }
+      }
+
+    }
+  }
+  .pagination {
+    width: 250px;
+    margin: auto;
+    text-align: center;
+    li {
+      color: #333333;
+      padding: 2px 10px;
+      border: 1px solid #333333;
+      a {
+        color: #333333;
+        font-size: 12px;
+      }
+      &:first-child,
+      &:last-child {
+        a {
+          font-size: 14px;
+        }
+      }
+      &.active {
+        a {
+          font-weight: bold;
+          color: #e74a3b;
+        }
+      }
+      &.disabled {
+        a {
+          color: #666666;
+        }
+      }
+    }
+  }
+  .loading-bottom {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .loading-bottom div {
+    display: inline-block;
+    position: absolute;
+    left: 8px;
+    width: 16px;
+    background: #666666;
+    animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  }
+  .loading-bottom div:nth-child(1) {
+    left: 8px;
+    animation-delay: -0.24s;
+  }
+  .loading-bottom div:nth-child(2) {
+    left: 32px;
+    animation-delay: -0.12s;
+  }
+  .loading-bottom div:nth-child(3) {
+    left: 56px;
+    animation-delay: 0;
+  }
+  @keyframes lds-facebook {
+    0% {
+      top: 8px;
+      height: 64px;
+    }
+    50%, 100% {
+      top: 24px;
+      height: 32px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .listing {
+    .popular-carousel{
+      height: 520px;
+      .coverflow  {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        .coverflow__text__39hqd {
+          font-size:28px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .listing {
+    .popular-carousel{
+      height: 820px;
+    }
+  }
+
+}
