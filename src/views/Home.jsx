@@ -13,6 +13,7 @@ class Home extends Component {
       nowPlaying: {},
       movies: [],
       popularMv: [],
+      listMovies: [],
       page: 1,
       loading: false,
       searchText: "",
@@ -24,17 +25,12 @@ class Home extends Component {
 
   handleSearch() {
     let searchText = this.props.location.state.searchText;
-
-    const rs = this.filterMovie(searchText);
+    const movies = this.state.listMovies;
+    const rs = movies.filter(mv => mv.title.includes(searchText));
     this.setState({
       movies: rs
-    })
+    });
   };
-  filterMovie(searchText) {
-    let movies = this.state.movies;
-    const searchRs = movies.filter(mv => mv.title.includes(searchText));
-    return searchRs;
-  }
 
   componentDidMount() {
     this.handleSearch();
@@ -70,6 +66,7 @@ class Home extends Component {
       this.setState({
         nowPlaying: result.data.nowPlaying,
         movies: result.data.nowPlaying.movies,
+        listMovies: result.data.nowPlaying.movies,
         popularMv: popularMovies
       });
 
@@ -139,6 +136,7 @@ class Home extends Component {
         this.setState({
           nowPlaying: result.data.nowPlaying,
           movies: listMovies,
+          listMovies: listMovies,
           page: result.data.nowPlaying.page,
           loading: false
         });
@@ -146,6 +144,7 @@ class Home extends Component {
         this.setState({
           nowPlaying: result.data.nowPlaying,
           movies: result.data.nowPlaying.movies,
+          listMovies: result.data.nowPlaying.movies,
           page: result.data.nowPlaying.page
         });
         this.backToTop();

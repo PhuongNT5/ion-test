@@ -40,8 +40,6 @@ class Index extends React.Component {
         pathname: "/",
         state: { searchText: text }
       });
-    } else {
-      alert("Please enter some search text!");
     }
   };
 
@@ -62,7 +60,7 @@ class Index extends React.Component {
               <input className="form-control form-control-sm " type="text" placeholder="Search"
                 aria-label="Search"
                 placeholder="Search"
-                value={this.state.filter}
+                value={this.state.searchText}
                 onChange={this.handleSearchInput} />
               <FontAwesomeIcon icon={faSearch} onClick={this.handleSearchSubmit} />
             </Form>
