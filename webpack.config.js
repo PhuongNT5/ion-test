@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { SourceMapDevToolPlugin } = require("webpack");
 
 module.exports = {
    entry: './src/main.js',
@@ -9,7 +10,7 @@ module.exports = {
    },
    devServer: {
       inline: true,
-      port: 8001
+      port: 3000
    },
    module: {
       rules: [
@@ -24,29 +25,37 @@ module.exports = {
          {
             test: /\.(png|jpg|svg)$/,
             use: [
-              'file-loader'
+               'file-loader'
             ]
-          },
+         },
          {
             test: /\.(scss|css)$/,
             use: ['style-loader', 'css-loader', 'sass-loader']
-          },
-          {
-				test: /\.jsx?$/,
-				exclude: /node_modules/,
-				use: {
-					loader: 'babel-loader',
-				},
-			}
+         },
+         {
+            test: /\.jsx?$/,
+            exclude: /node_modules/,
+            use: {
+               loader: 'babel-loader',
+            },
+         },
+         {
+            test: /\.js$/,
+            enforce: 'pre',
+            use: ['source-map-loader']
+         }
       ]
    },
    devServer: {
       historyApiFallback: true,
       contentBase: path.join(__dirname, '/public')
    },
-   plugins:[
+   plugins: [
       new HtmlWebpackPlugin({
          template: './src/index.html'
+      }),
+      new SourceMapDevToolPlugin({
+         filename: "[file].map"
       })
    ]
 }

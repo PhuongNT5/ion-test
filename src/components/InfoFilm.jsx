@@ -1,5 +1,4 @@
 import React, { Component, Img } from "react";
-import thumnail from "../assets/images/thumb-img.jpg";
 const InfoFilm = props => (
   <div className="col-12 col-md-3">
     <div className="info-wrapper">

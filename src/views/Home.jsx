@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import MovieCarousel from "../components/MovieCarousel.jsx";
 import FilmListing from "../components/FilmListing.jsx";
 import { useQuery, gql } from "@apollo/client";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
 import Pagination from "react-js-pagination";
 import GET_MOVIES from "../shared/util.jsx";
 
@@ -16,24 +15,26 @@ class Home extends Component {
       listMovies: [],
       page: 1,
       loading: false,
-      searchText: "",
+      searchText: ""
     };
     this.handlePageChange = this.handlePageChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  handleSearch() {
+  handleSearch = () => {
     let searchText = this.props.location.state.searchText;
     const movies = this.state.listMovies;
-    const rs = movies.filter(mv => mv.title.includes(searchText));
+    const rs = movies.filter(mv =>
+      mv.title.toLowerCase().includes(searchText.toLowerCase())
+    );
     this.setState({
-      movies: rs
+      movies: rs,
+      searchText: searchText
     });
   };
 
   componentDidMount() {
-    this.handleSearch();
     GET_MOVIES.query({
       query: gql`
         query GetMovies {
@@ -69,33 +70,36 @@ class Home extends Component {
         listMovies: result.data.nowPlaying.movies,
         popularMv: popularMovies
       });
-
     });
   }
-  componentDidUpdate(prevProps, prevState) {
-    window.addEventListener('scroll', this.handleScroll, false);
-    let prevSearch = prevProps.location.state.searchText;
-    let newSearch = this.props.location.state.searchText;
-    if (prevSearch !== newSearch) {
-      this.handleSearch();
+  componentDidUpdate(prevProps) {
+    window.addEventListener("scroll", this.handleScroll, false);
+    if (this.props.location.state && prevProps.location.state) {
+      let prevSearch = prevProps.location.state.searchText;
+      let newSearch = this.props.location.state.searchText;
+      if (prevSearch !== newSearch) {
+        this.handleSearch();
+      }
     }
   }
-  handleScroll() {
-    const check = parseInt(document.body.offsetHeight + window.pageYOffset) ===
+  handleScroll = () => {
+    const check =
+      parseInt(document.body.offsetHeight + window.pageYOffset) ===
       document.body.scrollHeight;
     if (check) {
       this.setState({
         loading: true,
         page: this.state.page + 1
       });
-      this.state.page < this.state.nowPlaying.totalPage ? this.handlePageChange(this.state.page, true) : '';
-      window.removeEventListener('scroll', this.handleScroll, false);
-
+      this.state.page < this.state.nowPlaying.totalPage
+        ? this.handlePageChange(this.state.page, true)
+        : "";
+      window.removeEventListener("scroll", this.handleScroll, false);
     }
-  }
-  backToTop() {
+  };
+  backToTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }
+  };
 
   handlePageChange(pageNumber, infinite) {
     GET_MOVIES.query({
@@ -129,7 +133,7 @@ class Home extends Component {
         let listMovies = [];
         this.state.movies.forEach(mv => {
           listMovies.push(mv);
-        })
+        });
         result.data.nowPlaying.movies.forEach(mv => {
           listMovies.push(mv);
         });
@@ -149,7 +153,6 @@ class Home extends Component {
         });
         this.backToTop();
       }
-
     });
   }
 
@@ -160,8 +163,13 @@ class Home extends Component {
         <MovieCarousel popularMv={this.state.popularMv}></MovieCarousel>
         <div className="container">
           <FilmListing movies={this.state.movies}></FilmListing>
-          {this.state.loading == false && <div className="loading-bottom">
-            <div></div><div></div><div></div></div>}
+          {this.state.loading == false && (
+            <div className="loading-bottom">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
           {this.state.movies.length > 20 && (
             <Pagination
               activePage={this.state.nowPlaying.page}
@@ -172,7 +180,6 @@ class Home extends Component {
             />
           )}
         </div>
-
       </div>
     );
   }

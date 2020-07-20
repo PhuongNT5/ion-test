@@ -1,7 +1,7 @@
 .listing {
   padding-bottom: 80px;
   padding-top: 82px;
-  
+
   .title {
   }
   &-wrapper {
@@ -79,7 +79,7 @@
     }
   }
   .popular-carousel {
-    background-image: url('../images/main_slider_bg.jpg');
+    background-image: url("../images/main_slider_bg.jpg");
     height: 320px;
     background-position: center 0;
     background-size: cover;
@@ -87,7 +87,7 @@
     z-index: 9;
     &::after {
       position: absolute;
-      content: '';
+      content: "";
       left: 0;
       top: 0;
       background-color: black;
@@ -103,9 +103,14 @@
         background: none;
       }
       &__figure__3bk_C {
-        -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0))
+        -webkit-box-reflect: below 1px -webkit-linear-gradient(bottom, rgba(255, 255, 255, 1), rgba(
+                255,
+                255,
+                255,
+                1
+              )
+              0%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0));
       }
-
     }
     #coverflow__arrow1__2X2XF {
       .coverflow__arrow__IDi7v {
@@ -114,18 +119,19 @@
       @media only screen and (max-width: 767px) {
         .coverflow__arrow__IDi7v.coverflow__right__1tzAF {
           right: 20px;
-          &:before, &:after  {
+          &:before,
+          &:after {
             width: 20px;
           }
         }
         .coverflow__arrow__IDi7v.coverflow__left__PhMc6 {
           left: 20px;
-          &:before, &:after  {
+          &:before,
+          &:after {
             width: 20px;
           }
         }
       }
-
     }
   }
   .pagination {
@@ -190,7 +196,8 @@
       top: 8px;
       height: 64px;
     }
-    50%, 100% {
+    50%,
+    100% {
       top: 24px;
       height: 32px;
     }
@@ -199,25 +206,16 @@
 
 @media only screen and (min-width: 768px) {
   .listing {
-    .popular-carousel{
+    .popular-carousel {
       height: 520px;
-      .coverflow  {
+      .coverflow {
         position: relative;
         top: 50%;
         transform: translateY(-50%);
         .coverflow__text__39hqd {
-          font-size:28px;
+          font-size: 28px;
         }
       }
     }
   }
-}
-
-@media only screen and (min-width: 1200px) {
-  .listing {
-    .popular-carousel{
-      height: 820px;
-    }
-  }
-
 }

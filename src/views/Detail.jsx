@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import BannerDetail from "../components/BannerDetail.jsx";
 import InfoFilm from "../components/InfoFilm.jsx";
 import { useQuery, gql } from "@apollo/client";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
 import ReviewFilm from "../components/ReviewFilm.jsx";
 import GET_MOVIES from "../shared/util.jsx";
 
@@ -44,8 +43,8 @@ class Detail extends Component {
       });
     });
   }
-  componentDidUpdate(prevState) { }
-  handleClick() { }
+  componentDidUpdate(prevState) {}
+  handleClick() {}
 
   render() {
     // console.log(this.state.time)
