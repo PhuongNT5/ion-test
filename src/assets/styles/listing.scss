@@ -1,9 +1,5 @@
 .listing {
   padding-bottom: 80px;
-  padding-top: 82px;
-
-  .title {
-  }
   &-wrapper {
     padding: 60px 0 40px;
     .movie-item {
@@ -85,6 +81,7 @@
     background-size: cover;
     position: relative;
     z-index: 9;
+    margin-bottom: 40px;
     &::after {
       position: absolute;
       content: "";
